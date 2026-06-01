@@ -9,6 +9,7 @@ REGISTRY = Path.home() / ".claude/skill-registry.md"
 EXCLUDED_PREFIXES = (
     Path.home() / ".claude/scheduled-tasks",  # Routines, not skills
     Path.home() / ".claude/skills",            # built-in skills, already discoverable
+    Path.home() / ".codex/skills",             # codex skills, not managed here
 )
 
 TEMPLATE = """\
@@ -91,13 +92,6 @@ def register(project: str, skill_name: str, skill_file: Path):
 
 
 def infer_project_name(skill_file: Path) -> str:
-    parts = skill_file.parts
-    try:
-        idx = parts.index(".claude")
-        return parts[idx - 1] if idx > 0 else "unknown"
-    except ValueError:
-        pass
-    # No .claude in path: try git repo root, else parent dir name
     try:
         result = subprocess.run(
             ["git", "-C", str(skill_file.parent), "rev-parse", "--show-toplevel"],
