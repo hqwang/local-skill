@@ -10,6 +10,7 @@ EXCLUDED_PREFIXES = (
     Path.home() / ".claude/scheduled-tasks",  # Routines, not skills
     Path.home() / ".claude/skills",            # built-in skills, already discoverable
     Path.home() / ".codex/skills",             # codex skills, not managed here
+    Path.home() / ".workbuddy",                # workbuddy connector skills, not user-managed
 )
 
 TEMPLATE = """\
