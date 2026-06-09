@@ -92,7 +92,15 @@ Read ~/.claude/skill-registry.md
 
 ### 步骤 2：展示列表
 
-以编号列表呈现给用户，每条一行（不要再展开多行，保持紧凑）：
+以编号列表呈现给用户，每条一行（不要再展开多行，保持紧凑）。
+
+**格式（强制三段式，每条必须严格按此结构输出，缺一不可）：**
+
+```
+<编号>. <skill_id> — <description> (<~/path/SKILL.md>)
+```
+
+示例：
 
 ```
 1. browser_work:daily-report-comment — 自动化飞书日报审核 (~/browser_work/skill/daily-report-comment/SKILL.md)
@@ -100,7 +108,18 @@ Read ~/.claude/skill-registry.md
 ...
 ```
 
-路径用 `~` 缩写 `$HOME` 前缀，保持紧凑。
+**强制要求（违反任何一条都算执行错误）：**
+
+- 每条**必须**带末尾的 `(~/path/SKILL.md)` 路径段，**不得省略**。这是用户用来核对、点击和直接 `Read` 的关键信息。
+- 路径用 `~` 缩写 `$HOME` 前缀，保持紧凑。
+- 不要因为「列表太长」「描述已经够清楚」「保持简洁」等任何理由跳过路径。
+- 不要把路径合并到 description 里或挪到第二行——必须是同一行末尾、用半角括号包裹。
+
+**常见偷懒模式（不要犯）：**
+
+- ❌ `1. browser_work:daily-report-comment — 自动化飞书日报审核`（缺路径）
+- ❌ `1. browser_work:daily-report-comment (自动化飞书日报审核)`（路径位置错位）
+- ✅ `1. browser_work:daily-report-comment — 自动化飞书日报审核 (~/browser_work/skill/daily-report-comment/SKILL.md)`
 
 ### 步骤 3：让用户选择
 
